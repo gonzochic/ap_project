@@ -2,13 +2,16 @@
 
 #include <iostream>
 
+#include "dataholder.hpp"
+
 CalculationLoop::CalculationLoop()
-{}
+{
+}
 
 CalculationLoop::~CalculationLoop()
 {}
 
 void CalculationLoop::run()
 {
-	std::cout << "Run" << std::endl;
+	DataHolder::instance().writeToConsole("Run the Dataholder");
 }

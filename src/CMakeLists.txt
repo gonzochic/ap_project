@@ -2,6 +2,7 @@ SET(ap_project_sources
   main.cpp
   core.cpp
   calculationloop.cpp
+  dataholder.cpp
 )
 SET (ap_project_headers
   ../incl/main.hpp
