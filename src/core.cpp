@@ -76,9 +76,3 @@ void ApCore::run()
 {
 	std::cout << "Run-> Counter: " << m_counter << std::endl;
 }
-
-
-
-
-
-
