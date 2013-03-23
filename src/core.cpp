@@ -44,16 +44,19 @@ void ApCore::start()
 					timeDifference(m_localTime,boost::posix_time::microsec_clock::local_time()); 
 				
 				if (timeDifference.length() >= boost::posix_time::milliseconds(CALCULATION_LOOP_SYNC_RATE_MS)) {
-
-					executor.execute(new CalculationLoop());
+					
 					m_localTime = boost::posix_time::microsec_clock::local_time();
+					std::cout << timeDifference.length() << std::endl; 
+					executor.execute(new CalculationLoop());
 				}
 			
 			}
 			
 		} catch(ZThread::Synchronization_Exception& e) {
 		std::cerr << e.what() << std::endl;
-	}
+		} catch (...) {
+		std::cerr << "Unknown ERROR" << std::endl;
+		}
 }
 
 void ApCore::pause()

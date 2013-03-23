@@ -26,11 +26,11 @@ FILE(WRITE incl/version.hpp
         "#endif // AP_PROJECT_VERSION_HPP\n"
 )
 
-INCLUDE(CacheCleanTarget)
+#INCLUDE(CacheCleanTarget)
 
 SET(PROJECT_VERSION ${ap_project_release})
 
-INCLUDE(DistTarget)
+#INCLUDE(DistTarget)
 
 SET(clean_targets
 	"${ap_project_SOURCE_DIR}/doxy.log"	
@@ -45,10 +45,10 @@ SET_DIRECTORY_PROPERTIES(PROPERTIES
 SET(CPACK_Boost_VERSION_REQUIRED 1.34)
 SET(CPACK_ZThread_VERSION_REQUIRED 2.3.2)
 
-FIND_PACKAGE(Boost ${CPACK_Boost_VERSION_REQUIRED} REQUIRED COMPONENTS system filesystem date_time program_options)
-FIND_PACKAGE(Log4CPlus)
-FIND_PACKAGE(XercesC)
-FIND_PACKAGE(ZThread ${CPACK_ZThread_VERSION_REQUIRED} EXACT REQUIRED)
+#FIND_PACKAGE(Boost ${CPACK_Boost_VERSION_REQUIRED} REQUIRED COMPONENTS system filesystem date_time program_options)
+#FIND_PACKAGE(Log4CPlus)
+#FIND_PACKAGE(XercesC)
+FIND_PACKAGE(ZThread ${CPACK_ZThread_VERSION_REQUIRED} REQUIRED)
 
 
 ADD_SUBDIRECTORY (src)
