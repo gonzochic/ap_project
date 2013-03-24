@@ -3,6 +3,9 @@ SET(ap_project_sources
   core.cpp
   calculationloop.cpp
   dataholder.cpp
+
+  I2Cdev.cpp
+  MPU6050.cpp
 )
 SET (ap_project_headers
   ../incl/main.hpp

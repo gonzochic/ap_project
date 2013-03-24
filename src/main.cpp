@@ -1,3 +1,5 @@
+#include "core.hpp"
+
 int main()
 {
 	ApCore core;

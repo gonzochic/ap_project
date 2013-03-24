@@ -14,7 +14,7 @@ class DataHolder
 {
 public:
 	
-	DataHolder& instance()
+	static DataHolder& instance()
 	{
 		static DataHolder dataHolder;
 		return dataHolder;

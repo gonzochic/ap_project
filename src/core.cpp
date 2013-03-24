@@ -12,10 +12,13 @@ const long CALCULATION_LOOP_SYNC_RATE_MS(50);
 ApCore::ApCore():
 	m_counter(0),
 	m_localTime(boost::posix_time::microsec_clock::local_time()),
-	m_runProcess(true)
+	m_runProcess(true),
+	m_sensor(new MPU6050())
 {
 	this->reset();
-	std::cout << m_localTime << std::endl; 
+	m_sensor->initialize();
+
+	this->configSensor();
 }
 ApCore::~ApCore()
 {
@@ -44,9 +47,16 @@ void ApCore::start()
 					timeDifference(m_localTime,boost::posix_time::microsec_clock::local_time()); 
 				
 				if (timeDifference.length() >= boost::posix_time::milliseconds(CALCULATION_LOOP_SYNC_RATE_MS)) {
-					
+					int16_t x,y,z;
+					int imax = std::numeric_limits<int16_t>::max();
+					std::cout << imax << std::endl;	
+					m_sensor->getAcceleration(&x, &y, &z);
 					m_localTime = boost::posix_time::microsec_clock::local_time();
-					std::cout << timeDifference.length() << std::endl; 
+					double xx((static_cast<double>(x)/imax) * 2 * 9.81);
+					double xy((static_cast<double>(y)/imax) * 2 * 9.81);
+					double xz((static_cast<double>(z)/imax) * 2 * 9.81);
+					std::cout << "X: " << xx << " - Y: " << xy << " - Z: " << xz << std::endl; 
+					
 					executor.execute(new CalculationLoop());
 				}
 			
@@ -75,4 +85,11 @@ void ApCore::quit()
 void ApCore::run()
 {
 	std::cout << "Run-> Counter: " << m_counter << std::endl;
+}
+
+void ApCore::configSensor()
+{
+	// 0 = 2g
+	m_sensor->setFullScaleAccelRange(0);
+	std::cout << "Sensitiviy: " << m_sensor->getFullScaleAccelRange() << std::endl;
 }
